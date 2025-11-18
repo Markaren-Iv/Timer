@@ -65,11 +65,9 @@ seconds_entry = tk.Entry(timer_frame, textvariable=seconds_var, width=20)
 entries.append(seconds_entry)
 
 #########
-colon = tk.StringVar()
-colon.set(":")
 labels = []
 
-hours_label = tk.Label(timer_frame,textvariable=hours_var, text = hours_var + colon)
+hours_label = tk.Label(timer_frame,textvariable=hours_var, text = "00:")
 hours_label.grid(row=1, column=0)
 labels.append(hours_label)
 
