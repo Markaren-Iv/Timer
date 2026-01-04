@@ -4,13 +4,13 @@ import tkinter as tk
 
 def update_time():
     current_time = time.localtime()
-    hour = str(current_time.tm_hour)
-    minute = str(current_time.tm_min)
-    second = str(current_time.tm_sec)
+    h = current_time.tm_hour
+    m = current_time.tm_min
+    s = current_time.tm_sec
 
-    hour_label.config(text = hour + " : ")
-    minute_label.config(text = minute + " : ")
-    second_label.config(text = second) 
+    clock_hour_label.config(text = f"{h:02} :")
+    clock_minute_label.config(text = f"{m:02} :")
+    clock_second_label.config(text = f"{s:02}" ) 
 
     window.after(1000, update_time)
 
@@ -18,7 +18,7 @@ def update_time():
 
 def show_entry(i):
     labels[i].grid_remove()  # Hide label (keeps grid position)
-    entries[i].grid(row=1, column=i)  # Show entry in same spot
+    entries[i].grid(row=1, column=i*2)  # Show entry in same spot
     entries[i].focus()
     entries[i].select_range(0, tk.END)
 
@@ -51,52 +51,54 @@ seconds_var.set("00")
 
 
 timer_frame = tk.Frame(window, relief="solid")
-timer_frame.pack(pady=10)
+timer_frame.pack()
 ###########
 entries = []
 
-hours_entry = tk.Entry(timer_frame, textvariable=hours_var, width=20)
-entries.append(hours_entry)
+timer_hours_entry = tk.Entry(timer_frame, textvariable=hours_var, width=3)
+entries.append(timer_hours_entry)
 
-minutes_entry = tk.Entry(timer_frame, textvariable=minutes_var, width=20)
-entries.append(minutes_entry)
+timer_minutes_entry = tk.Entry(timer_frame, textvariable=minutes_var, width=3)
+entries.append(timer_minutes_entry)
 
-seconds_entry = tk.Entry(timer_frame, textvariable=seconds_var, width=20)
-entries.append(seconds_entry)
+timer_seconds_entry = tk.Entry(timer_frame, textvariable=seconds_var, width=3)
+entries.append(timer_seconds_entry)
 
 #########
 labels = []
 
-hours_label = tk.Label(timer_frame,textvariable=hours_var, text = "00:")
-hours_label.grid(row=1, column=0)
-labels.append(hours_label)
+timer_hours_label = tk.Label(timer_frame,textvariable=hours_var, text = "00")
+timer_hours_label.grid(row=1, column=0)
+labels.append(timer_hours_label)
 
-minutes_label = tk.Label(timer_frame, textvariable=minutes_var, text = "00:")
-minutes_label.grid(row=1, column=1)
-labels.append(minutes_label)
+colon_label_1 = tk.Label(timer_frame, text = ":")
+colon_label_1.grid(row=1, column=1)
 
-seconds_label = tk.Label(timer_frame, textvariable=seconds_var, text = "00")
-seconds_label.grid(row=1, column=2)
-labels.append(seconds_label)
+timer_minutes_label = tk.Label(timer_frame, textvariable=minutes_var, text = "00")
+timer_minutes_label.grid(row=1, column=2)
+labels.append(timer_minutes_label)
+
+colon_label_2 = tk.Label(timer_frame, text = ":")
+colon_label_2.grid(row=1, column=3)
+
+timer_seconds_label = tk.Label(timer_frame, textvariable=seconds_var, text = "00")
+timer_seconds_label.grid(row=1, column=4)
+labels.append(timer_seconds_label)
 
 
-
-
-button = tk.Button(timer_frame, text="Start")
-button.grid(row=2, column=1)
 
 #clock 
 time_frame = tk.Frame(window, relief="solid")
-time_frame.pack(anchor="e", pady=80)
+time_frame.pack(side = "bottom", anchor="e")
 
-hour_label = tk.Label(time_frame, text = "")
-hour_label.grid(row=2, column=0)
+clock_hour_label = tk.Label(time_frame, text = "")
+clock_hour_label.grid(row=2, column=0)
 
-minute_label = tk.Label(time_frame, text = "")
-minute_label.grid(row=2, column=1)
+clock_minute_label = tk.Label(time_frame, text = "")
+clock_minute_label.grid(row=2, column=1)
 
-second_label = tk.Label(time_frame, text = "")
-second_label.grid(row=2, column=2)
+clock_second_label = tk.Label(time_frame, text = "")
+clock_second_label.grid(row=2, column=2)
 
 update_time()
 
